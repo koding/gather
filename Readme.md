@@ -22,7 +22,7 @@ There are currently two types of scripts: abuse in `gatherers/ab/` and analytics
 
 ## Building
 
-`./build.sh` will cross compile the `gather` binary. You'll need cross compilation enabled in Go (GOOS=linux GOARCH=386).
+`./build.sh` will cross compile the `gather` binary. You'll need cross compilation enabled in Go (GOOS=linux GOARCH=386). It'll also upload the script to S3.
 
 ## Running
 
