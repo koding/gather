@@ -10,6 +10,20 @@ import (
 	"strings"
 )
 
+var (
+	EarlyExit = "klient works"
+	EnvKey    = "GATHER"
+
+	Abuse     = "abuse"
+	Analytics = "analytics"
+
+	CommonScriptPath      = "gatherers/common"
+	AbuseScriptPrefix     = "gatherers/ab/"
+	AnalyticsScriptPrefix = "gatherers/an/"
+
+	DefaultKeys = []string{Abuse, Analytics}
+)
+
 type Result struct {
 	Error string      `json:"error,omitempty"`
 	Name  string      `json:"name"`
@@ -17,25 +31,31 @@ type Result struct {
 	Value interface{} `json:"value"`
 }
 
-var EarlyExit = fmt.Sprintf("klient works")
-
 type Results []*Result
 
 func main() {
-	if len(os.Args) < 2 || os.Args[1] != "xAboBy" {
+	envKey := os.Getenv(EnvKey)
+	if envKey == "" || !contains(envKey, DefaultKeys) {
 		fmt.Println(EarlyExit)
 		os.Exit(0)
 	}
 
+	defer os.Unsetenv(EnvKey)
+
 	var results = Results{}
 
-	commonBytes, err := Asset("gatherers/common")
+	commonBytes, err := Asset(CommonScriptPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	var scriptPrefix string = AbuseScriptPrefix
+	if envKey == Analytics {
+		scriptPrefix = AnalyticsScriptPrefix
+	}
+
 	for scriptPath, _ := range _bindata {
-		if runnable(scriptPath) {
+		if runnable(scriptPath, scriptPrefix) {
 			result, err := runScript(commonBytes, scriptPath)
 			if err != nil {
 				continue
@@ -49,8 +69,8 @@ func main() {
 	fmt.Println(string(resultBytes))
 }
 
-func runnable(scriptPath string) bool {
-	return strings.Contains(scriptPath, "gatherers/run-")
+func runnable(scriptPath, scriptPrefix string) bool {
+	return strings.Contains(scriptPath, scriptPrefix)
 }
 
 func runScript(commonBytes []byte, scriptPath string) (*Result, error) {
@@ -77,4 +97,14 @@ func encodeResult(resultBytes []byte) (*Result, error) {
 	}
 
 	return &result, nil
+}
+
+func contains(key string, collection []string) bool {
+	for _, c := range collection {
+		if c == key {
+			return true
+		}
+	}
+
+	return false
 }
