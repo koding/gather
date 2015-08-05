@@ -27,21 +27,24 @@ function output() {
 }
 
 function output_unless_falsy() {
-
-  if [ $3 -ne 0 ] && [ $3 != "false" ] && [ -n $3 ]
+  if [[ $3 -ne 0 ]] && [[ $3 != "false" ]] && [[ -n $3 ]]
   then
     output "$1" "$2" "$3"
   fi
 }
 
 function number_of_lines() {
-  file=$1
-  if [ -e "$file" ]
+  dir=$2
+
+  if [[ -z $2 ]]
   then
-    wc -l $file | awk '{print $1}'
-  else
-    echo 0
+    $dir=""
   fi
+
+  filename=$1
+  dirs=$(find /home/*/$dir -mindepth 1 -maxdepth 1 -name $filename |& grep -v "Permission denied")
+
+  output_unless_falsy "$1 line count" $NUMBER $(wc -l $dirs | tail -1 | awk '{print $1}')
 }
 
 function list_file_types() {
