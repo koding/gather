@@ -1,0 +1,4 @@
+if [[ -n $(find / -name "*.torrent" |& grep -v 'Permission denied') ]]
+then
+        output 'torrent file(s) detected' $BOOLEAN 1
+fi

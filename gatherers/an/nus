@@ -1,0 +1,12 @@
+LIST_DIR=$(ls /home | grep -v ubuntu)
+
+COUNT=0
+for dir in $LIST_DIR
+do
+	if [[ -n $(grep $dir /etc/passwd) ]]
+	then
+		let COUNT=COUNT+1
+	fi
+done
+output_unless_empty "user count" $NUMBER $COUNT
+
