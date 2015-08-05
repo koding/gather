@@ -8,7 +8,7 @@ fi
 
 export GATHER=$GATHER
 
-rm gather
 go-bindata -o ./gatherers.go gatherers/...
 go build
 ./gather
+rm gather
