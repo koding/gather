@@ -1,0 +1,16 @@
+declare -a KEYWORDS=("flood" "attack" "ddos")
+declare -a OUT
+for keyword in "${KEYWORDS[@]}"
+do
+  RES=$(find /home -type f -print0 |& grep -Ri "flood" |& grep -v "Permission denied")
+  for ((i=0; i < ${#RES[@]}; i++))
+  do
+    PATH="$( cut -d ';' -f 1 <<< "${RES[$i]}" )"
+    LINE="$( cut -d ';' -f 2- <<< "${RES[$i]}" )"
+    OUT[$i]="{\"path\":\"$PATH\",\"line\":\"$LIN\"}"
+  done
+done
+if [[ ${#OUT[@]} -eq 0 ]]
+then
+  ouput "abusive keywords found" $ARRAY OUT[@]
+fi
