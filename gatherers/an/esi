@@ -1,0 +1,1 @@
+dir_exists "/usr/share/elasticsearch" "elasticsearch found"

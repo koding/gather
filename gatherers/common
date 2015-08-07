@@ -1,0 +1,68 @@
+BOOLEAN="boolean"
+NUMBER="number"
+ARRAY="array"
+
+function output() {
+  set -f
+  if [[ $2 == $ARRAY ]]
+  then
+    IFS=$'\n'
+    declare -a ARG_ARRAY=("${!3}")
+    OUT="["
+
+    for i in ${ARG_ARRAY[@]}
+    do
+      TMP=$i
+      TMP=${TMP//'"'/'\"'}
+      OUT="$OUT\"$TMP\","
+    done
+
+    OUT="${OUT::-1}]"
+  else
+    OUT="$3"
+  fi
+
+  OUT=${OUT//[$'\t\n']}
+  echo "{\"name\":\"$1\", \"type\":\"$2\", \"value\":$OUT}"
+}
+
+function output_unless_falsy() {
+  if [[ $3 -ne 0 ]] && [[ $3 != "false" ]] && [[ -n $3 ]]
+  then
+    output "$1" "$2" "$3"
+  fi
+}
+
+function number_of_lines() {
+  dir=$2
+
+  if [[ -z $2 ]]
+  then
+    $dir=""
+  fi
+
+  filename=$1
+  dirs=$(find /home/*/$dir -mindepth 1 -maxdepth 1 -name $filename |& grep -v "Permission denied")
+
+  output_unless_falsy "$1 line count" $NUMBER $(wc -l $dirs | tail -1 | awk '{print $1}')
+}
+
+function list_file_types() {
+  cd ~; find . -maxdepth 2 -type f -name '*.*' -not -path "*/.gem/*" -not -path "*.npm/*" -not -path "*node_modules/*" | sed 's|.*\.||' | sort | uniq -c | sort -n
+}
+
+function list_git_repos() {
+  cd ~; find . -maxdepth 5 -type d -name '*.git'
+}
+
+function installed() {
+  if which $2 > /dev/null; then
+    output "$1" $BOOLEAN true
+  fi
+}
+
+function dir_exists() {
+  if [ -d $1 ]; then
+    output $2 $BOOLEAN true
+  fi
+}

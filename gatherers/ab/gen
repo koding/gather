@@ -1,0 +1,36 @@
+function found() {
+  COUNT=`grep "$1" -r /home/ 2> /dev/null | wc -l`
+
+  if [ $COUNT -gt 0 ]
+  then
+    output "$2" $BOOLEAN true
+    exit
+  fi
+}
+
+found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'abuse: ddos'
+found 'DDoSing the IP' 'abuse: ddos'
+found 'TOOL DDOS DIE' 'abuse: ddos'
+found 'Deskdubstep' 'abuse: ddos'
+found 'Written by Sotd' 'abuse: possible ddos (Sotd)'
+
+found 'Python Vulnerability Scanner' 'abuse: python vulnerability scanner'
+found 'Scans for FTP servers' 'abuse: ftp scan'
+
+found 'HULK DG Tan cong' 'abuse: suspicious script'
+found 'PT47 Attack Started' 'abuse: suspicious script'
+
+found 'Facebook Cracker Version' 'abuse: facebook abuse'
+found 'facebook bruteforcer' 'abuse: facebook abuse'
+found 'yudha.gunslinger@gmail.com' 'abuse: possible facebook abuse (yudha)'
+found 'http://autolikefb.org/f5.html' 'abuse: facebook autolike'
+found 'author: KIT HERO' 'abuse: possible ddos (KIT HERO)'
+found 'Slowloris' 'abuse: slowloris ddos'
+found 'Metasploit' 'abuse: metasploit'
+found 'minecraft_server' 'abuse: minecraft server'
+found 'mining_proxy' 'abuse: mining proxy'
+found 'send(flood, pack("a$psize","flood"), 0, pack_sockaddr_in($pport, $iaddr));}' 'abuse: ddos'
+found 'token = random.choice([\'.NET CLR\', \'SV1\', \'Tablet PC\', \'Win64; IA64\', \'Win64; x64\', \'WOW64\']) + \'; \'' 'abuse: ddos'
+found 'send(flood, pack("a$psize","flood"), 0, pack_sockaddr_in($pport, $iaddr));}' 'abuse: ddos'
+found 'request = "POST %s/xmlrpc.php HTTP/1.0\r\nHost: %s\r\nUser-Agent: Internal Wordpress RPC connection' 'abuse: ddos'
+found '(random.randint(6, 32), random.randint(100, 2000), random.randint(0, 100), random.randint(535, 537), random.randint(1, 36)) for i in range(1, 30) ] + [ 'Version/%d.%d.%d Safari/%d' 'abuse: ddos'
