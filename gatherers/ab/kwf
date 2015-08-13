@@ -1,0 +1,16 @@
+declare -a KEYWORDS=("flood" "ddos")
+OUT=()
+set -f
+for keyword in "${KEYWORDS[@]}"
+do
+  while read -r item; do
+    if [[ "$item" == \/* ]]
+    then
+      path="$(cut -d ':' -f 1 <<< "$item")"
+      line="$(cut -d ':' -f 2- <<< "$item")"
+      line=${line//'"'/'\"'}
+      OUT+=( "{\"path\":\"$path\",\"line\":\"$line\"}\n" )
+    fi
+  done < <(grep "$keyword" -r /home/ 2> /dev/null |& grep -v "Permission denied")
+done
+output "abusive keywords found" $ARRAY OUT[@]

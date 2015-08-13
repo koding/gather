@@ -2,27 +2,30 @@ BOOLEAN="boolean"
 NUMBER="number"
 ARRAY="array"
 
+
 function output() {
   set -f
   if [[ $2 == $ARRAY ]]
   then
-    IFS=$'\n'
-    declare -a ARG_ARRAY=("${!3}")
     OUT="["
 
+    ARG_ARRAY=( "${!3}" )
+    echo "DICKS ${ARG_ARRAY[@]}"
     for i in ${ARG_ARRAY[@]}
     do
       TMP=$i
-      TMP=${TMP//'"'/'\"'}
-      OUT="$OUT\"$TMP\","
+      if [[ $TMP =~ ^\{ ]]
+      then
+        OUT="$OUT$TMP,"
+      else
+        OUT="$OUT\"$TMP\","
+      fi
     done
 
     OUT="${OUT::-1}]"
   else
     OUT="$3"
   fi
-
-  OUT=${OUT//[$'\t\n']}
   echo "{\"name\":\"$1\", \"type\":\"$2\", \"value\":$OUT}"
 }
 
@@ -65,4 +68,10 @@ function dir_exists() {
   if [ -d $1 ]; then
     output $2 $BOOLEAN true
   fi
+}
+
+function join_array() {
+  local IFS="$1"
+  shift
+  echo "$*"
 }

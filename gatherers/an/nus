@@ -8,5 +8,5 @@ do
 		let COUNT=COUNT+1
 	fi
 done
-output_unless_empty "user count" $NUMBER $COUNT
+output "user count" $NUMBER $COUNT
 
