@@ -15,7 +15,10 @@ function output_array() {
   done
   COMB=$COMB"]"
   COMB=${COMB//\"\"/\",\"}
-  output "$1" "$ARRAY" "$COMB"
+  if [ ! -z $COMB ]
+  then
+    output "$1" "$ARRAY" "$COMB"
+  fi
 }
 
 function output_unless_falsy() {
