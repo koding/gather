@@ -18,7 +18,7 @@ echo "$name has authorized uploading..."
 echo
 
 echo "Uploading to s3..."
-aws s3 cp gather.tar s3://gather-vm
+aws s3 cp gather.tar s3://koding-gather
 
 echo "Cleaning up..."
 rm gather gather.tar
