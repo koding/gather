@@ -1,11 +1,6 @@
 function found() {
-  COUNT=`grep "$1" -r /home/ 2> /dev/null | wc -l`
-
-  if [ $COUNT -gt 0 ]
-  then
-    output "$2" $BOOLEAN true
-    exit
-  fi
+  OUT=`egrep -lir "($1)" /home |& grep -v "Permission denied"`
+  output_array "$2" "$OUT"
 }
 
 found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'abuse: ddos'
@@ -34,3 +29,7 @@ found 'token = random.choice([\'.NET CLR\', \'SV1\', \'Tablet PC\', \'Win64; IA6
 found 'send(flood, pack("a$psize","flood"), 0, pack_sockaddr_in($pport, $iaddr));}' 'abuse: ddos'
 found 'request = "POST %s/xmlrpc.php HTTP/1.0\r\nHost: %s\r\nUser-Agent: Internal Wordpress RPC connection' 'abuse: ddos'
 found '(random.randint(6, 32), random.randint(100, 2000), random.randint(0, 100), random.randint(535, 537), random.randint(1, 36)) for i in range(1, 30) ] + [ 'Version/%d.%d.%d Safari/%d' 'abuse: ddos'
+
+found 'ddos' 'abuse: invasive keyword foudn (ddos)'
+found 'attack' 'abuse: invasive keyword found (attack)'
+found 'flood' 'abuse: invasive keyword found (flood)'

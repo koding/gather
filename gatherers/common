@@ -2,30 +2,23 @@ BOOLEAN="boolean"
 NUMBER="number"
 ARRAY="array"
 
-
 function output() {
   set -f
-  if [[ $2 == $ARRAY ]]
+  echo "{\"name\":\"$1\", \"type\":\"$2\", \"value\":$3}"
+}
+
+function output_array() {
+  if [[ -n $2 ]]
   then
-    OUT="["
-
-    ARG_ARRAY=( "${!3}" )
-    for i in ${ARG_ARRAY[@]}
-    do
-      TMP=$i
-      if [[ $TMP =~ ^\{ ]]
-      then
-        OUT="$OUT$TMP,"
-      else
-        OUT="$OUT\"$TMP\","
-      fi
+    set -f
+    COMB="["
+    for i in $2; do
+      COMB="$COMB\"$i\""
     done
-
-    OUT="${OUT::-1}]"
-  else
-    OUT="$3"
+    COMB=$COMB"]"
+    COMB=${COMB//\"\"/\",\"}
+    output "$1" "$ARRAY" "$COMB"
   fi
-  echo "{\"name\":\"$1\", \"type\":\"$2\", \"value\":$OUT}"
 }
 
 function output_unless_falsy() {
@@ -40,7 +33,7 @@ function number_of_lines() {
 
   if [[ -z $2 ]]
   then
-    $dir=""
+    dir=""
   fi
 
   filename=$1
