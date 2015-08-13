@@ -1,4 +1,5 @@
-if [[ -n $(find / -name "*.torrent" |& grep -v 'Permission denied') ]]
+OUT=$(find /home -name "*.torrent" |& grep -v "Permission denied")
+if [[ -n $OUT ]]
 then
-        output 'torrent file(s) detected' $BOOLEAN 1
+  output_array 'torrent file(s) detected' "$OUT"
 fi
