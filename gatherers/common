@@ -4,7 +4,7 @@ ARRAY="array"
 
 function output() {
   set -f
-  echo "{\"name\":\"$1\", \"type\":\"$2\", \"value\":$OUT}"
+  echo "{\"name\":\"$1\", \"type\":\"$2\", \"value\":$3}"
 }
 
 function output_array() {

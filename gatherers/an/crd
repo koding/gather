@@ -1,4 +1,4 @@
-CRON_OUT=$(crontab -l | grep -v "#")
+CRON_OUT=$(crontab -l | grep -v "#" | sed '/^\s*$/d')
 COUNT=0
 declare -a CRON_DATA
 for i in "$CRON_OUT"
@@ -6,7 +6,8 @@ do
 	CRON_DATA[COUNT]=$i
 	let COUNT=COUNT+1
 done
-if [[ $COUNT -gt 0 ]]
+echo ${#CRON_DATA[@]}
+if [ ${#CRON_DATA[@]} -ne 0 ]
 then
-	output_array "cron entries detected" CRON_DATA[@]
+	output_array "cron entries detected" $CRON_OUT
 fi
