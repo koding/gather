@@ -8,14 +8,13 @@ function output() {
 }
 
 function output_array() {
+  set -f
   COMB="["
   for i in $2; do
     COMB="$COMB\"$i\""
   done
   COMB=$COMB"]"
-
   COMB=${COMB//\"\"/\",\"}
-
   output "$1" "$ARRAY" "$COMB"
 }
 
@@ -31,7 +30,7 @@ function number_of_lines() {
 
   if [[ -z $2 ]]
   then
-    $dir=""
+    dir=""
   fi
 
   filename=$1
