@@ -1,5 +1,1 @@
-OUT=$(find /home -name "*.torrent" |& grep -v "Permission denied")
-if [[ -n $OUT ]]
-then
-  output_array 'torrent file(s) detected' "$OUT"
-fi
+output_array 'torrent file(s) detected' $(find /home -name "*.torrent" |& grep -v "Permission denied")

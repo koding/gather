@@ -8,15 +8,15 @@ function output() {
 }
 
 function output_array() {
-  set -f
-  COMB="["
-  for i in $2; do
-    COMB="$COMB\"$i\""
-  done
-  COMB=$COMB"]"
-  COMB=${COMB//\"\"/\",\"}
-  if [ $COMB -ne "[]" ]
+  if [[ -n $2 ]]
   then
+    set -f
+    COMB="["
+    for i in $2; do
+      COMB="$COMB\"$i\""
+    done
+    COMB=$COMB"]"
+    COMB=${COMB//\"\"/\",\"}
     output "$1" "$ARRAY" "$COMB"
   fi
 }
