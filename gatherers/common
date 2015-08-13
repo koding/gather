@@ -15,7 +15,7 @@ function output_array() {
   done
   COMB=$COMB"]"
   COMB=${COMB//\"\"/\",\"}
-  if [ ! -z $COMB ]
+  if [ $COMB -ne "[]" ]
   then
     output "$1" "$ARRAY" "$COMB"
   fi
