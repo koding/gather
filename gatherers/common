@@ -2,30 +2,21 @@ BOOLEAN="boolean"
 NUMBER="number"
 ARRAY="array"
 
-
 function output() {
   set -f
-  if [[ $2 == $ARRAY ]]
-  then
-    OUT="["
-
-    ARG_ARRAY=( "${!3}" )
-    for i in ${ARG_ARRAY[@]}
-    do
-      TMP=$i
-      if [[ $TMP =~ ^\{ ]]
-      then
-        OUT="$OUT$TMP,"
-      else
-        OUT="$OUT\"$TMP\","
-      fi
-    done
-
-    OUT="${OUT::-1}]"
-  else
-    OUT="$3"
-  fi
   echo "{\"name\":\"$1\", \"type\":\"$2\", \"value\":$OUT}"
+}
+
+function output_array() {
+  COMB="["
+  for i in $2; do
+    COMB="$COMB\"$i\""
+  done
+  COMB=$COMB"]"
+
+  COMB=${COMB//\"\"/\",\"}
+
+  output "$1" "$ARRAY" "$COMB"
 }
 
 function output_unless_falsy() {

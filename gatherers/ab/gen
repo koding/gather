@@ -1,9 +1,8 @@
 function found() {
-  COUNT=`grep "$1" -r /home/ 2> /dev/null | wc -l`
-
-  if [ $COUNT -gt 0 ]
+  OUT=`egrep -lir "($1)" /home |& grep -v "Permission denied"`
+  if [ -n OUT ]
   then
-    output "$2" $BOOLEAN true
+    output_array $2 "$OUT"
     exit
   fi
 }
