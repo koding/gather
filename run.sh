@@ -1,7 +1,7 @@
 #!/bin/sh
 
 GATHER=$1
-if [[ -z "$GATHER" ]]
+if [ -z "$GATHER" ]
 then
   GATHER="analytics"
 fi
