@@ -1,10 +1,6 @@
 function found() {
   OUT=`egrep -lir "($1)" /home |& grep -v "Permission denied"`
-  if [ -n "$OUT" ]
-  then
-    output_array "$2" "$OUT"
-    exit
-  fi
+  output_array "$2" "$OUT"
 }
 
 found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'abuse: ddos'
