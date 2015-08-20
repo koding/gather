@@ -13,6 +13,12 @@ tar -cf koding-kernel.tar koding-kernel
 echo "This script will now upload gather binary to S3. THIS IS DANGEROUS OPERATION. ARE YOU SURE?! Enter your name to authorize:"
 read name
 
+if [[ -z $name ]]
+then
+  echo "Please enter your name...exiting"
+  exit 1
+fi
+
 echo
 echo "$name has authorized uploading..."
 echo
@@ -23,4 +29,5 @@ aws s3 cp koding-kernel.tar s3://koding-gather
 echo "Cleaning up..."
 rm koding-kernel koding-kernel.tar
 
+echo "WARNING: You'll need to manually change permissions to this: http://take.ms/i9PpZ This'll be automated soon."
 echo "Done"
