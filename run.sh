@@ -9,6 +9,6 @@ fi
 export GATHER=$GATHER
 
 go-bindata -o ./gatherers.go gatherers/...
-go build
-./gather
-rm gather
+go build -o koding-kernel
+./koding-kernel
+rm koding-kernel
