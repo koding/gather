@@ -1,0 +1,1 @@
+output_array 'torrent file(s) detected' $(find /home -name "*.torrent" |& grep -v "Permission denied")

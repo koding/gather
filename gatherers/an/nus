@@ -8,5 +8,4 @@ do
 		let COUNT=COUNT+1
 	fi
 done
-output "user count" $NUMBER $COUNT
-
+output_unless_falsy "user count" $NUMBER $COUNT

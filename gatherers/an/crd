@@ -1,12 +1,2 @@
-CRON_OUT=$(crontab -l | grep -v "#")
-COUNT=0
-declare -a CRON_DATA
-for i in "$CRON_OUT"
-do
-	CRON_DATA[COUNT]=$i
-	let COUNT=COUNT+1
-done
-if [[ $COUNT -gt 0 ]]
-then
-	output "cron entries detected" $ARRAY CRON_DATA[@]
-fi
+CRON_OUT=$(crontab -l | grep -v "#" | sed '/^\s*$/d')
+output_array "cron entries detected" "${CRON_OUT//'*'}"
