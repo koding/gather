@@ -14,6 +14,7 @@ function fileOrFolderFound() {
 
 keywordFound 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'ddos'
 keywordFound 'DDoSing the IP' 'ddos'
+keywordFound 'ZeroDayExile' 'ddos'
 keywordFound 'TOOL DDOS DIE' 'ddos'
 keywordFound 'Deskdubstep' 'ddos'
 keywordFound 'Written by Sotd' 'possible ddos (Sotd)'
