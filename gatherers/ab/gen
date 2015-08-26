@@ -1,6 +1,8 @@
 function found() {
   OUT=`grep -rslc "$1" /home`
   output_array "$2" "$OUT"
+
+  exit 0
 }
 
 found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'ddos'
