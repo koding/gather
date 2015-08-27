@@ -38,7 +38,7 @@ exit_if_file_found 'Flood.pl' 'UDP flood script'
 exit_if_installed 'dropbear' 'dropbear ssh client installed'
 exit_if_installed 'hping3' 'hping3 installed'
 exit_if_installed 'nmap' 'nmap portscanner installed'
-exit_if_installed 'ncat' 'ncat portscanner installed
+exit_if_installed 'ncat' 'ncat portscanner installed'
 exit_if_installed 'pnscan' 'pnscan portscanner installed'
 exit_if_installed 'knocker' 'knocker portscanner installed'
 exit_if_installed 'nast' 'nast portscanner installed'
