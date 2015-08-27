@@ -29,6 +29,9 @@ exit_if_keyword_found 'Joomla Vulnerability Scanner' 'joomla vulnerability scann
 exit_if_keyword_found '$ip,$port,$size,$time' 'ddos'
 
 exit_if_file_found 'ddos.pl' 'ddos'
+exit_if_file_found 'DDoS.pl' 'ddos'
+exit_if_file_found 'udp.pl' 'ddos'
+exit_if_file_found 'triplu.pl' 'ddos'
 exit_if_file_found 'flood.pl' 'UDP flood script'
 exit_if_file_found 'Flood.pl' 'UDP flood script'
 
