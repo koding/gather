@@ -58,6 +58,28 @@ function installed() {
 
 function dir_exists() {
   if [ -d $1 ]; then
-    output $2 $BOOLEAN true
+    output "$2" $BOOLEAN true
   fi
+}
+
+function exit_if_installed() {
+  if which $1 > /dev/null; then
+    output "$2" $BOOLEAN true
+  fi
+
+  exit 0
+}
+
+function exit_if_keyword_found() {
+  OUT=$(grep -rslc "$1" /home)
+  output_array "$2" "$OUT"
+
+  exit 0
+}
+
+function exit_if_file_found() {
+  OUT=$(find /home/* -name "$1" |& grep -v 'Permission denied')
+  output_array "$2" "$OUT"
+
+  exit 0
 }
