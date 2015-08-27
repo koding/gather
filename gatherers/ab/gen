@@ -5,6 +5,22 @@
 #  exit_if_file_found    - uses find to check for 1st arg, can be file or binary
 #  exit_if_installed     - uses which to check for 1st arg
 
+exit_if_file_found 'ddos.pl' 'ddos'
+exit_if_file_found 'DDoS.pl' 'ddos'
+exit_if_file_found 'udp.pl' 'ddos'
+exit_if_file_found 'triplu.pl' 'ddos'
+exit_if_file_found 'flood.pl' 'UDP flood script'
+exit_if_file_found 'Flood.pl' 'UDP flood script'
+
+exit_if_installed 'hping3' 'hping3 installed'
+exit_if_installed 'dropbear' 'dropbear ssh client installed'
+exit_if_installed 'hping3' 'hping3 installed'
+exit_if_installed 'nmap' 'nmap portscanner installed'
+exit_if_installed 'ncat' 'ncat portscanner installed'
+exit_if_installed 'pnscan' 'pnscan portscanner installed'
+exit_if_installed 'knocker' 'knocker portscanner installed'
+exit_if_installed 'nast' 'nast portscanner installed'
+
 exit_if_keyword_found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'ddos'
 exit_if_keyword_found 'DDoSing the IP' 'ddos'
 exit_if_keyword_found 'TOOL DDOS DIE' 'ddos'
@@ -27,18 +43,3 @@ exit_if_keyword_found '(random.randint(6, 32), random.randint(100, 2000), random
 exit_if_keyword_found 'masscan-app.h' 'masscan file'
 exit_if_keyword_found 'Joomla Vulnerability Scanner' 'joomla vulnerability scanner'
 exit_if_keyword_found '$ip,$port,$size,$time' 'ddos'
-
-exit_if_file_found 'ddos.pl' 'ddos'
-exit_if_file_found 'DDoS.pl' 'ddos'
-exit_if_file_found 'udp.pl' 'ddos'
-exit_if_file_found 'triplu.pl' 'ddos'
-exit_if_file_found 'flood.pl' 'UDP flood script'
-exit_if_file_found 'Flood.pl' 'UDP flood script'
-
-exit_if_installed 'dropbear' 'dropbear ssh client installed'
-exit_if_installed 'hping3' 'hping3 installed'
-exit_if_installed 'nmap' 'nmap portscanner installed'
-exit_if_installed 'ncat' 'ncat portscanner installed'
-exit_if_installed 'pnscan' 'pnscan portscanner installed'
-exit_if_installed 'knocker' 'knocker portscanner installed'
-exit_if_installed 'nast' 'nast portscanner installed'
