@@ -1,44 +1,41 @@
-function keywordFound() {
-  OUT=`grep -rslc "$1" /home`
-  output_array "$2" "$OUT"
+# Following are helpers you can use to find abuse in user VMs. All helpers exit when
+# something is matched:
+#
+#  exit_if_keyword_found - uses grep to check for 1st arg
+#  exit_if_file_found    - uses find to check for 1st arg, can be file or binary
+#  exit_if_installed     - uses which to check for 1st arg
 
-  exit 0
-}
+exit_if_keyword_found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'ddos'
+exit_if_keyword_found 'DDoSing the IP' 'ddos'
+exit_if_keyword_found 'TOOL DDOS DIE' 'ddos'
+exit_if_keyword_found 'Deskdubstep' 'ddos'
+exit_if_keyword_found 'Written by Sotd' 'possible ddos (Sotd)'
+exit_if_keyword_found 'Python Vulnerability Scanner' 'python vulnerability scanner'
+exit_if_keyword_found 'Scans for FTP servers' 'ftp scan'
+exit_if_keyword_found 'HULK DG Tan cong' 'suspicious script'
+exit_if_keyword_found 'PT47 Attack Started' 'suspicious script'
+exit_if_keyword_found 'Facebook Cracker Version' 'facebook abuse'
+exit_if_keyword_found 'facebook bruteforcer' 'facebook abuse'
+exit_if_keyword_found 'yudha.gunslinger@gmail.com' 'possible facebook abuse (yudha)'
+exit_if_keyword_found 'http://autolikefb.org/f5.html' 'facebook autolike'
+exit_if_keyword_found 'author: KIT HERO' 'possible ddos (KIT HERO)'
+exit_if_keyword_found 'minecraft_server' 'minecraft server'
+exit_if_keyword_found 'mining_proxy' 'mining proxy'
+exit_if_keyword_found 'send(flood, pack("a$psize","flood"), 0, pack_sockaddr_in($pport, $iaddr));}' 'ddos'
+exit_if_keyword_found 'request = "POST %s/xmlrpc.php HTTP/1.0\r\nHost: %s\r\nUser-Agent: Internal Wordpress RPC connection' 'ddos'
+exit_if_keyword_found '(random.randint(6, 32), random.randint(100, 2000), random.randint(0, 100), random.randint(535, 537), random.randint(1, 36)) for i in range(1, 30) ] + [ 'Version/%d.%d.%d Safari/%d' 'ddos'
+exit_if_keyword_found 'masscan-app.h' 'masscan file'
+exit_if_keyword_found 'Joomla Vulnerability Scanner' 'joomla vulnerability scanner'
+exit_if_keyword_found '$ip,$port,$size,$time' 'ddos'
 
-function fileOrFolderFound() {
-  OUT=$(find /home/* -name "$1" |& grep -v 'Permission denied')
-  output_array "$2" "$OUT"
+exit_if_file_found 'ddos.pl' 'ddos'
+exit_if_file_found 'flood.pl' 'UDP flood script'
+exit_if_file_found 'Flood.pl' 'UDP flood script'
 
-  exit 0
-}
-
-keywordFound 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'ddos'
-keywordFound 'DDoSing the IP' 'ddos'
-keywordFound 'TOOL DDOS DIE' 'ddos'
-keywordFound 'Deskdubstep' 'ddos'
-keywordFound 'Written by Sotd' 'possible ddos (Sotd)'
-
-keywordFound 'Python Vulnerability Scanner' 'python vulnerability scanner'
-keywordFound 'Scans for FTP servers' 'ftp scan'
-
-keywordFound 'HULK DG Tan cong' 'suspicious script'
-keywordFound 'PT47 Attack Started' 'suspicious script'
-
-keywordFound 'Facebook Cracker Version' 'facebook abuse'
-keywordFound 'facebook bruteforcer' 'facebook abuse'
-keywordFound 'yudha.gunslinger@gmail.com' 'possible facebook abuse (yudha)'
-keywordFound 'http://autolikefb.org/f5.html' 'facebook autolike'
-keywordFound 'author: KIT HERO' 'possible ddos (KIT HERO)'
-keywordFound 'minecraft_server' 'minecraft server'
-keywordFound 'mining_proxy' 'mining proxy'
-keywordFound 'send(flood, pack("a$psize","flood"), 0, pack_sockaddr_in($pport, $iaddr));}' 'ddos'
-keywordFound 'token = random.choice([\'.NET CLR\', \'SV1\', \'Tablet PC\', \'Win64; IA64\', \'Win64; x64\', \'WOW64\']) + \'; \'' 'ddos'
-keywordFound 'send(flood, pack("a$psize","flood"), 0, pack_sockaddr_in($pport, $iaddr));}' 'ddos'
-keywordFound 'request = "POST %s/xmlrpc.php HTTP/1.0\r\nHost: %s\r\nUser-Agent: Internal Wordpress RPC connection' 'ddos'
-keywordFound '(random.randint(6, 32), random.randint(100, 2000), random.randint(0, 100), random.randint(535, 537), random.randint(1, 36)) for i in range(1, 30) ] + [ 'Version/%d.%d.%d Safari/%d' 'ddos'
-keywordFound 'masscan-app.h' 'masscan file'
-keywordFound 'Joomla Vulnerability Scanner' 'joomla vulnerability scanner'
-
-keywordFound 'my ($ip,$port,$size,$time) = @ARGV;' 'ddos'
-
-fileOrFolderFound 'ddos.pl' 'ddos'
+exit_if_installed 'dropbear' 'dropbear ssh client installed'
+exit_if_installed 'hping3' 'hping3 installed'
+exit_if_installed 'nmap' 'nmap portscanner installed'
+exit_if_installed 'ncat' 'ncat portscanner installed
+exit_if_installed 'pnscan' 'pnscan portscanner installed'
+exit_if_installed 'knocker' 'knocker portscanner installed'
+exit_if_installed 'nast' 'nast portscanner installed'
