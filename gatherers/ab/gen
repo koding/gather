@@ -22,6 +22,8 @@ exit_if_installed 'nast' 'abuse: portscanner installed'
 
 exit_if_keyword_found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'abuse: keyword found'
 exit_if_keyword_found 'send(flood, pack("a$psize","flood"), 0, pack_sockaddr_in($pport, $iaddr));}' 'abuse: keyword found'
+exit_if_keyword_found 'socket(flood, PF_INET, SOCK_DGRAM, 17)' 'abuse: keyword found'
+exit_if_keyword_found 'Created by ./PATRIANI' 'abuse: keyword found'
 exit_if_keyword_found 'Python Vulnerability Scanner' 'abuse: keyword found'
 exit_if_keyword_found 'Scans for FTP servers' 'abuse: keyword found'
 exit_if_keyword_found 'HULK DG Tan cong' 'abuse: keyword found'
