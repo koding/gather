@@ -33,7 +33,6 @@ exit_if_file_found 'startgtaserver.sh' 'abuse: game server found'
 exit_if_file_found 'Minecraft.jar' 'abuse: game server found'
 exit_if_file_found 'minecraft-installer' 'abuse: game server found'
 
-
 exit_if_installed 'hping3' 'abuse: hping3 installed'
 exit_if_installed 'dropbear' 'abuse: dropbear ssh client installed'
 exit_if_installed 'nmap' 'abuse: portscanner installed'
@@ -45,6 +44,7 @@ exit_if_installed 'teamspeak' 'abuse: portscanner installed'
 exit_if_installed 'minecraft-installer' 'abuse: portscanner installed'
 
 exit_if_keyword_found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'abuse: keyword found'
+exit_if_keyword_found 'Super Hulk ATTACK STARTED' 'abuse: keyword found'
 exit_if_keyword_found 'https://github.com/Dionach/cmsmap' 'abuse: keyword found'
 exit_if_keyword_found 'CVE: CVE-2013-1453' 'abuse: keyword found'
 exit_if_keyword_found 'Remote shell upload exploit for wp-powerplaygallery' 'abuse: keyword found'
