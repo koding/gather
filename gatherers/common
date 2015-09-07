@@ -70,7 +70,7 @@ function exit_if_installed() {
 }
 
 function exit_if_keyword_found() {
-  OUT=$(grep -rslc "$1" /home)
+  OUT=$(ag -lQ "$1" /home |& grep -v 'Permission denied')
   output_array "$2" "$OUT"
 
   if [[ -n $OUT ]]; then
@@ -79,7 +79,16 @@ function exit_if_keyword_found() {
 }
 
 function exit_if_file_found() {
-  OUT=$(find /home/* -name "$1" |& grep -v 'Permission denied')
+  OUT=$(locate -i "$1")
+  output_array "$2" "$OUT"
+
+  if [[ -n $OUT ]]; then
+    exit 0
+  fi
+}
+
+function exit_if_location_found() {
+  OUT=$(ls $1 |& grep -v 'No such file or directory')
   output_array "$2" "$OUT"
 
   if [[ -n $OUT ]]; then

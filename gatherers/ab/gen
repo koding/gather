@@ -1,16 +1,25 @@
 # Following are helpers you can use to find abuse in user VMs. All helpers exit when
 # something is matched:
 #
-#  exit_if_keyword_found - uses grep to check for 1st arg
-#  exit_if_file_found    - uses find to check for 1st arg, can be file or binary
-#  exit_if_installed     - uses which to check for 1st arg
+#  exit_if_keyword_found  - uses `ag -lQ` to check for 1st arg
+#  exit_if_file_found     - uses `locate` to check for 1st arg, can be file or binary
+#                           filenames are case insensitive
+#  exit_if_installed      - uses `which` to check for 1st arg
+#  exit_if_location_found - uses `ls` to check for existence of 1st arg in exact location
+
+# install `ag` for searching keywords
+sudo apt-get install -y silversearcher-ag > /dev/null
+
+# update `locate` index of files
+sudo updatedb
 
 exit_if_file_found 'ddos.pl' 'abuse: file found'
-exit_if_file_found 'DDoS.pl' 'abuse: file found'
 exit_if_file_found 'udp.pl' 'abuse: file found'
 exit_if_file_found 'triplu.pl' 'abuse: file found'
 exit_if_file_found 'flood.pl' 'abuse: file found'
-exit_if_file_found 'Flood.pl' 'abuse: file found'
+exit_if_file_found 'teamspeak' 'abuse: file found'
+
+exit_if_location_found '/home/*/xml' 'abuse: file found'
 
 exit_if_installed 'hping3' 'abuse: hping3 installed'
 exit_if_installed 'dropbear' 'abuse: dropbear ssh client installed'
@@ -24,6 +33,12 @@ exit_if_keyword_found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'abus
 exit_if_keyword_found 'send(flood, pack("a$psize","flood"), 0, pack_sockaddr_in($pport, $iaddr));}' 'abuse: keyword found'
 exit_if_keyword_found 'socket(flood, PF_INET, SOCK_DGRAM, 17)' 'abuse: keyword found'
 exit_if_keyword_found 'Created by ./PATRIANI' 'abuse: keyword found'
+exit_if_keyword_found '$ip,$port,$size,$time' 'abuse: keyword found'
+exit_if_keyword_found 'minecraft_server' 'abuse: keyword found'
+exit_if_keyword_found 'DDoSing the IP' 'abuse: keyword found'
+exit_if_keyword_found 'TOOL DDOS DIE' 'abuse: keyword found'
+exit_if_keyword_found 'Deskdubstep' 'abuse: keyword found'
+exit_if_keyword_found 'Written by Sotd' 'abuse: keyword found'
 exit_if_keyword_found 'Python Vulnerability Scanner' 'abuse: keyword found'
 exit_if_keyword_found 'Scans for FTP servers' 'abuse: keyword found'
 exit_if_keyword_found 'HULK DG Tan cong' 'abuse: keyword found'
@@ -31,7 +46,8 @@ exit_if_keyword_found 'PT47 Attack Started' 'abuse: keyword found'
 exit_if_keyword_found 'Facebook Cracker Version' 'abuse: keyword found'
 exit_if_keyword_found 'facebook bruteforcer' 'abuse: keyword found'
 exit_if_keyword_found 'yudha.gunslinger@gmail.com' 'abuse: keyword found'
-exit_if_keyword_found 'minecraft_server' 'abuse: keyword found'
+exit_if_keyword_found 'http://autolikefb.org/f5.html' 'abuse: keyword found'
+exit_if_keyword_found 'author: KIT HERO' 'abuse: keyword found'
+exit_if_keyword_found 'mining_proxy' 'abuse: keyword found'
 exit_if_keyword_found 'masscan-app.h' 'abuse: keyword found'
 exit_if_keyword_found 'Joomla Vulnerability Scanner' 'abuse: keyword found'
-exit_if_keyword_found '$ip,$port,$size,$time' 'abuse: keyword found'
