@@ -8,7 +8,12 @@
 #  exit_if_location_found - uses `ls` to check for existence of 1st arg in exact location
 
 # install `ag` for searching keywords
-sudo apt-get install -y silversearcher-ag > /dev/null
+which ag > /dev/null
+if [[ "$?" -ne "0" ]]
+then
+  sudo apt-get update |& > /dev/null
+  sudo apt-get install -y silversearcher-ag |& > /dev/null
+fi
 
 # update `locate` index of files
 sudo updatedb
