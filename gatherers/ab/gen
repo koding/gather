@@ -44,6 +44,8 @@ exit_if_installed 'teamspeak' 'abuse: portscanner installed'
 exit_if_installed 'minecraft-installer' 'abuse: portscanner installed'
 
 exit_if_keyword_found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'abuse: keyword found'
+exit_if_keyword_found 'PHP DDOS By SYNC' 'abuse: keyword found'
+
 exit_if_keyword_found 'Super Hulk ATTACK STARTED' 'abuse: keyword found'
 exit_if_keyword_found 'https://github.com/Dionach/cmsmap' 'abuse: keyword found'
 exit_if_keyword_found 'CVE: CVE-2013-1453' 'abuse: keyword found'
