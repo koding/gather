@@ -19,9 +19,17 @@ fi
 sudo updatedb
 
 exit_if_file_found 'ddos.pl' 'abuse: file found'
+exit_if_file_found 'DDuS.pl' 'abuse: file found'
 exit_if_file_found 'udp.pl' 'abuse: file found'
+exit_if_file_found 'attack.pl' 'abuse: file found'
+exit_if_file_found 'atack.pl' 'abuse: file found'
+exit_if_file_found 'ufuk.pl' 'abuse: file found'
+exit_if_file_found 'ViruS.pl' 'abuse: file found'
 exit_if_file_found 'triplu.pl' 'abuse: file found'
 exit_if_file_found 'flood.pl' 'abuse: file found'
+exit_if_file_found 'flood2.pl' 'abuse: file found'
+exit_if_file_found 'furkandos.pl' 'abuse: file found'
+exit_if_file_found 'die.py' 'abuse: file found'
 exit_if_file_found 'teamspeak' 'abuse: file found'
 exit_if_file_found 'cmsmap.py' 'abuse: file found'
 exit_if_file_found 'joomlaVulnScanner.php' 'abuse: file found'
