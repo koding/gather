@@ -74,6 +74,7 @@ exit_if_installed 'pnscan' 'abuse: portscanner installed'
 exit_if_installed 'knocker' 'abuse: portscanner installed'
 exit_if_installed 'nast' 'abuse: portscanner installed'
 exit_if_installed 'minecraft-installer' 'abuse: game server installed'
+exit_if_installed 'msfconsole' 'abuse: portscanner installed'
 
 exit_if_keyword_found 'send(crazy, 0, $size, sockaddr_in($port, $iaddr));' 'abuse: keyword found'
 exit_if_keyword_found 'send(flood, pack("a$psize","flood"), 0, pack_sockaddr_in($pport, $iaddr));}' 'abuse: keyword found'
