@@ -59,7 +59,6 @@ exit_if_file_found 'thanhun7887.py' 'abuse: file found'
 exit_if_file_found 'bitcoin.conf' 'abuse: bitcoin found'
 exit_if_file_found 'toibingu.py' 'abuse: file found'
 exit_if_file_found 'undeptrai.py' 'abuse: file found'
-exit_if_file_found 'crunch' 'abuse: file found'
 exit_if_file_found 'cracf2john.py' 'abuse: file found'
 exit_if_file_found 'odf2john.py' 'abuse: file found'
 
